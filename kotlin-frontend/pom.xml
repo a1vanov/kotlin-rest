@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>kotlin-rest-parent</artifactId>
+        <groupId>ru.gpn.kr</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>kotlin-frontend</artifactId>
+    <packaging>pom</packaging>
+
+    <name>kotlin-frontend</name>
+    <modules>
+        <module>frontend-1</module>
+    </modules>
+    <properties>
+        <project.build.packages>${project.build.directory}/packages</project.build.packages>
+    </properties>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                    <artifactId>kotlin-maven-plugin</artifactId>
+                    <configuration>
+                        <moduleKind>umd</moduleKind>
+                        <sourceMap>true</sourceMap>
+                        <outputFile>${project.build.packages}/${project.name}/${project.name}.js</outputFile>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>compile</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>js</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>test-compile</id>
+                            <phase>test-compile</phase>
+                            <goals>
+                                <goal>test-js</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

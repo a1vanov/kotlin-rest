@@ -1,0 +1,53 @@
+
+)node.exe yarn.js run build
+c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\target\node\node c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\target\node\yarn\dist\bin\yarn.js run build
+
+) yarn add uglifyjs-webpack-plugin
+c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\target\node\node c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\target\node\yarn\dist\bin\yarn.js install uglifyjs-webpack-plugin
+
+)yarn add compression-webpack-plugin
+c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\target\node\node c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\target\node\yarn\dist\bin\yarn.js add compression-webpack-plugin
+
+)
+Working directory: 
+C:\Projects\kotlin-maven-example\build\js\packages\confexplorer 
+Command: 
+C:\Users\User\.gradle\nodejs\node-v12.14.0-win-x64\node.exe C:\Projects\kotlin-maven-example\build\js\node_modules\webpack\bin\webpack.js --config C:\Projects\kotlin-maven-example\build\js\packages\confexplorer\webpack.config.js
+
+)node.exe node_modules\webpack\bin\webpack.js --config webpack.config.js
+c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\target\node\node.exe c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\node_modules\webpack\bin\webpack.js --config c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\webpack.config.js
+
+
+) JavaScript Dead Code Elimination (DCE)
+
+)
+
+Working directory: 
+c:\Projects\kotlin-maven\kotlin-frontend\frontend-1 
+Command: 
+C:\Users\User\.gradle\nodejs\node-v12.14.0-win-x64\node.exe C:\Projects\kotlin-maven-example\build\js\node_modules\webpack\bin\webpack.js --config c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\webpack.config.js
+
+) --optimize-minimize
+c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\target\node\node.exe c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\node_modules\webpack\bin\webpack.js --optimize-minimize --config c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\webpack.config.js
+
+) https://improve-future.com/en/kotlin-how-to-use-cli-kotlin-kotlinc-kotlinc-js-kotlin-dce-js.html
+kotlinc-js Hello.kt -output hello.js
+
+kotlin-dce-js hello.js
+You can use -d option to designate the output directory. Here I don’t use it. Without the option, it outputs hello.js into min directory.
+
+) Kotlin compiler
+https://github.com/JetBrains/kotlin/releases
+
+
+) full name
+c:\"Program Files"\JetBrains\"IntelliJ IDEA 2020.1"\plugins\Kotlin\kotlinc\bin\kotlin-dce-js.bat c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\target\packages\frontend-1\frontend-1.js c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\target\packages\kotlin\kotlin.js c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\target\packages\kotlin-extensions\kotlin-extensions.js c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\target\packages\kotlin-react\kotlin-react.js c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\target\packages\kotlin-react-dom\kotlin-react-dom.js c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\target\packages\kotlinx-coroutines-core\kotlinx-coroutines-core.js c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\target\packages\kotlinx-html-js\kotlinx-html-js.js
+
+) full single file
+c:\"Program Files"\JetBrains\"IntelliJ IDEA 2020.1"\plugins\Kotlin\kotlinc\bin\kotlin-dce-js.bat c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\target\kotlin-dce\frontend-1.js
+
+c:\"Program Files"\JetBrains\"IntelliJ IDEA 2020.1"\plugins\Kotlin\kotlinc\bin\kotlin-dce-js.bat c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\target\packages\frontend-1\frontend-1.js c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\target\packages\kotlin\kotlin.js
+
+
+) plugin command line
+"C:\Java\LibericaJDK-8\bin\java.exe" -Xmx4G -Xms32M -noverify -cp "c:\PROGRA~1\JETBRA~1\INTELL~1.1\plugins\Kotlin\kotlinc\bin\..\lib\kotlin-preloader.jar"  org.jetbrains.kotlin.preloading.Preloader -cp "c:\PROGRA~1\JETBRA~1\INTELL~1.1\plugins\Kotlin\kotlinc\bin\..\lib\kotlin-compiler.jar" org.jetbrains.kotlin.cli.js.dce.K2JSDce c:\Projects\kotlin-maven\kotlin-frontend\frontend-1\target\kotlin-dce\frontend-1.js

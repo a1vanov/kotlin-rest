@@ -1,0 +1,32 @@
+Что и на каких стадиях кастомизировано:
+
+validate
+initialize
+generate-sources
+process-sources
+generate-resources
+process-resources
+
+compile - компиляции .kt в .js
+process-classes 1. build kotlin-wrapper packages (извлечение из jar-файлов, добавление package.json) 
+                2. dce kotlin-wrapper packages 
+generate-test-sources
+process-test-sources
+generate-test-resources
+process-test-resources
+test-compile
+process-test-classes
+test
+
+prepare-package - 1."frontend-maven-plugin::install-node-and-yarn" - локальная установка nodeJs и yarn
+                  2."yarn install" - установка всех зависимостей из package.json (dependencies, devDependencies, workspaces)
+                  3."yarn run build-dev" or "yarn run build-prod" - сборка js bundle на основе webpack.config.js
+package
+
+pre-integration-test
+integration-test
+post-integration-test
+
+verify
+install
+deploy

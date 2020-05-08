@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>kotlin-frontend</artifactId>
+        <groupId>ru.gpn.tp</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>frontend-1</artifactId>
+    <packaging>jar</packaging>
+    <!--<name>frontend-1</name>-->
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>yarn run build-dev</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>yarn</goal>
+                                </goals>
+                                <configuration>
+                                    <arguments>run build-dev</arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>yarn run build-prod</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>yarn</goal>
+                                </goals>
+                                <configuration>
+                                    <arguments>run build-prod</arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <build>
+        <sourceDirectory>src/main/kotlin</sourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>build kotlin wrapper packages</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <property name="build-wrapper-package.xml"
+                                          value="${project.basedir}/maven/antrun/build-wrapper-package.xml"/>
+                                <property name="packages.path" value="${project.build.packages}"/>
+
+                                <ant antfile="${build-wrapper-package.xml}">
+                                    <property name="wrapper.jar" value="${org.jetbrains.kotlin:kotlin-stdlib-js:jar}"/>
+                                    <property name="package.name" value="kotlin"/>
+                                </ant>
+                                <ant antfile="${build-wrapper-package.xml}">
+                                    <property name="wrapper.jar"
+                                              value="${org.jetbrains.kotlin:kotlin-source-map-loader:jar}"/>
+                                </ant>
+                                <ant antfile="${build-wrapper-package.xml}">
+                                    <property name="wrapper.jar"
+                                              value="${org.jetbrains.kotlinx:kotlinx-coroutines-core-js:jar}"/>
+                                    <property name="package.name" value="kotlinx-coroutines-core"/>
+                                </ant>
+                                <ant antfile="${build-wrapper-package.xml}">
+                                    <property name="wrapper.jar" value="${org.jetbrains:kotlin-extensions:jar}"/>
+                                </ant>
+                                <ant antfile="${build-wrapper-package.xml}">
+                                    <property name="wrapper.jar" value="${org.jetbrains:kotlin-react:jar}"/>
+                                </ant>
+                                <ant antfile="${build-wrapper-package.xml}">
+                                    <property name="wrapper.jar" value="${org.jetbrains:kotlin-react-dom:jar}"/>
+                                </ant>
+                                <ant antfile="${build-wrapper-package.xml}">
+                                    <property name="wrapper.jar" value="${org.jetbrains.kotlinx:kotlinx-html-js:jar}"/>
+                                </ant>
+                            </target>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>dce kotlin packages</id>
+                        <!--DCE - Dead Code Elimination-->
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <ant antfile="${project.basedir}/maven/antrun/dce-packages.xml">
+                                    <property name="packages.path" value="${project.build.packages}"/>
+                                    <property name="dce.path" value="${project.build.directory}/packages-dce"/>
+                                </ant>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <!-- for DCE compilation -->
+                    <dependency>
+                        <!--
+                        Since there is no official artifact on Central Reporitory
+                        to compile javascript
+                        -->
+                        <groupId>net.offecka</groupId>
+                        <artifactId>kotlin-preloader</artifactId>
+                        <version>1.0.4-1</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-compiler</artifactId>
+                        <version>1.3.72</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <configuration>
+                    <nodeVersion>v13.13.0</nodeVersion>
+
+                    <!-- optional: with node version greater than 4.0.0 will use npm provided by node distribution -->
+                    <!--<npmVersion>2.15.9</npmVersion>-->
+
+                    <!-- optional: where to download node and npm from. Defaults to https://nodejs.org/dist/ -->
+                    <!--<downloadRoot>http://myproxy.example.org/nodejs/</downloadRoot>-->
+                    <yarnVersion>v1.22.4</yarnVersion>
+                    <installDirectory>${project.build.directory}</installDirectory>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>install node and yarn</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>install-node-and-yarn</goal>
+                        </goals>
+                    </execution>
+
+                    <execution>
+                        <id>yarn install</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <!-- To compile mixed code applications Kotlin compiler should be invoked before Java compiler. -->
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>kotlin-react</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>kotlin-react-dom</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>kotlin-styled</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-js</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-source-map-loader</artifactId>
+        </dependency>
+
+        <dependency>
+            <!-- for Idea-2017 -->
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--<dependency>-->
+        <!--<groupId>org.webjars.npm</groupId>-->
+        <!--<artifactId>react</artifactId>-->
+        <!--</dependency>-->
+    </dependencies>
+</project>

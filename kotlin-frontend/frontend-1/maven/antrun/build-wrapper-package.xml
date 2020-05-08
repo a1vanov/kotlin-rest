@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<project name="build-wrapper-package" default="build">
+    <!--
+    required props:
+     ${wrapper.jar}
+     ${packages.path}
+    -->
+    <target name="build" depends="build-if-not-built, message-if-already-built"/>
+
+
+    <target name="build-if-not-built" depends="set-props" unless="already-built">
+        <echo level="info" message="build package name=${package.name}, ver=${package.ver}"/>
+
+        <unzip src="${wrapper.jar}" dest="${package.path}">
+            <patternset>
+                <include name="*.js"/>
+                <include name="*.js.map"/>
+                <exclude name="*.meta.js"/>
+            </patternset>
+        </unzip>
+        <echo file="${package.path}/package.json" append="false"><![CDATA[
+{
+  "main": "${package.name}.js",
+  "devDependencies": {},
+  "dependencies": {},
+  "peerDependencies": {},
+  "optionalDependencies": {},
+  "bundledDependencies": [],
+  "name": "${package.name}",
+  "version": "${package.ver}"
+}
+]]>
+        </echo>
+    </target>
+
+
+    <target name="message-if-already-built" depends="set-props" if="already-built">
+        <echo level="info" message="package already built: name=${package.name}, ver=${package.ver}"/>
+    </target>
+
+
+    <target name="set-props">
+        <dirname property="wrapper.ver-path" file="${wrapper.jar}"/>
+        <dirname property="wrapper.name-path" file="${wrapper.ver-path}"/>
+
+        <basename property="package.ver" file="${wrapper.ver-path}"/>
+        <basename property="package.name" file="${wrapper.name-path}"/>
+
+        <property name="package.path" value="${packages.path}/${package.name}"/>
+
+        <available file="${package.path}/package.json" property="already-built"/>
+    </target>
+</project>
