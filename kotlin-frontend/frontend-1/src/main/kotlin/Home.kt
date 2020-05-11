@@ -1,7 +1,13 @@
+import kotlinx.css.*
 import org.w3c.dom.get
 import react.dom.h1
 import react.dom.render
+import styled.css
+import styled.styledDiv
 import kotlin.browser.document
+
+//import kotlinx.css.*
+
 
 //import kotlinx.html.*
 //import kotlinx.html.dom.*
@@ -18,11 +24,11 @@ fun main(args: Array<String>) {
 //        app()
 //    }
 //    RBuilder()
-    render(document.getElementById("root")) {
-        h1 {
-            +"Home Page. Hello, React+Kotlin/JS!"
-        }
-    }
+//    render(document.getElementById("root")) {
+//        h1 {
+//            +"Home Page. Hello, React+Kotlin/JS!"
+//        }
+//    }
     val body = document.getElementsByTagName("body")[0];
     render(body) {
         h1 {
@@ -34,6 +40,7 @@ fun main(args: Array<String>) {
                 top = 10.px
                 right = 10.px
             }
+            +"Это styledDiv"
         }
     }
 

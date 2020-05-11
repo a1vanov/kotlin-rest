@@ -163,6 +163,7 @@
                 <artifactId>kotlin-css-js</artifactId>
                 <version>1.0.0-pre.103-kotlin-1.3.72</version>
             </dependency>
+
             <dependency>
                 <!--runtime for kotlin-react, kotlin-react-dom -->
                 <groupId>org.jetbrains</groupId>
@@ -183,6 +184,12 @@
                 <groupId>org.jetbrains</groupId>
                 <artifactId>kotlin-styled</artifactId>
                 <version>1.0.0-pre.103-kotlin-1.3.72</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.jetbrains</groupId>
+                        <artifactId>kotlin-css</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>

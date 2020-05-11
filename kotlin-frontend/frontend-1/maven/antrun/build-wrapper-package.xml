@@ -8,16 +8,10 @@
     <target name="build" depends="build-if-not-built, message-if-already-built"/>
 
 
-    <target name="build-if-not-built" depends="set-props" unless="already-built">
-        <echo level="info" message="build package name=${package.name}, ver=${package.ver}"/>
+    <target name="build-if-not-built" depends="create-package-json, unpack-jar"/>
 
-        <unzip src="${wrapper.jar}" dest="${package.path}">
-            <patternset>
-                <include name="*.js"/>
-                <include name="*.js.map"/>
-                <exclude name="*.meta.js"/>
-            </patternset>
-        </unzip>
+
+    <target name="create-package-json" depends="set-props, unpack-jar" unless="already-built, package-json-exist">
         <echo file="${package.path}/package.json" append="false"><![CDATA[
 {
   "main": "${package.name}.js",
@@ -32,6 +26,22 @@
 ]]>
         </echo>
     </target>
+
+
+    <target name="unpack-jar" depends="set-props" unless="already-built">
+        <echo level="info" message="build package name=${package.name}, ver=${package.ver}"/>
+        <unzip src="${wrapper.jar}" dest="${package.path}">
+            <patternset>
+                <include name="*.js"/>
+                <include name="*.js.map"/>
+                <include name="package.json"/>
+                <exclude name="*.meta.js"/>
+            </patternset>
+        </unzip>
+
+        <available file="${package.path}/package.json" property="package-json-exist"/>
+    </target>
+
 
 
     <target name="message-if-already-built" depends="set-props" if="already-built">

@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <artifactId>kotlin-frontend</artifactId>
-        <groupId>ru.gpn.tp</groupId>
+        <groupId>ru.gpn.kr</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
@@ -96,10 +96,19 @@
                                     <property name="wrapper.jar"
                                               value="${org.jetbrains.kotlin:kotlin-source-map-loader:jar}"/>
                                 </ant>
+
                                 <ant antfile="${build-wrapper-package.xml}">
                                     <property name="wrapper.jar"
                                               value="${org.jetbrains.kotlinx:kotlinx-coroutines-core-js:jar}"/>
                                     <property name="package.name" value="kotlinx-coroutines-core"/>
+                                </ant>
+                                <ant antfile="${build-wrapper-package.xml}">
+                                    <property name="wrapper.jar" value="${org.jetbrains.kotlinx:kotlinx-html-js:jar}"/>
+                                </ant>
+
+                                <ant antfile="${build-wrapper-package.xml}">
+                                    <property name="wrapper.jar" value="${org.jetbrains:kotlin-css-js:jar}"/>
+                                    <property name="package.name" value="kotlin-wrappers-kotlin-css"/>
                                 </ant>
                                 <ant antfile="${build-wrapper-package.xml}">
                                     <property name="wrapper.jar" value="${org.jetbrains:kotlin-extensions:jar}"/>
@@ -111,7 +120,7 @@
                                     <property name="wrapper.jar" value="${org.jetbrains:kotlin-react-dom:jar}"/>
                                 </ant>
                                 <ant antfile="${build-wrapper-package.xml}">
-                                    <property name="wrapper.jar" value="${org.jetbrains.kotlinx:kotlinx-html-js:jar}"/>
+                                    <property name="wrapper.jar" value="${org.jetbrains:kotlin-styled:jar}"/>
                                 </ant>
                             </target>
                         </configuration>
@@ -205,13 +214,16 @@
     <dependencies>
         <dependency>
             <groupId>org.jetbrains</groupId>
+            <artifactId>kotlin-css-js</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
             <artifactId>kotlin-react</artifactId>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>kotlin-react-dom</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>kotlin-styled</artifactId>

@@ -6,8 +6,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>ru.gpn.tp</groupId>
-        <artifactId>kotlin-maven-parent</artifactId>
+        <groupId>ru.gpn.kr</groupId>
+        <artifactId>kotlin-rest-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
