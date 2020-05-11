@@ -39,7 +39,9 @@
             </patternset>
         </unzip>
 
-        <available file="${package.path}/package.json" property="package-json-exist"/>
+        <available file="${package.path}/package.json"
+                   property="package-json-exist"
+                   description="because of some .jars have package.json, kotlin-styled for example"/>
     </target>
 
 
