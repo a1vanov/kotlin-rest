@@ -18,10 +18,6 @@
         <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
         <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
         <plugins>
-            <!--            <plugin>-->
-            <!--                <groupId>org.jetbrains.kotlin</groupId>-->
-            <!--                <artifactId>kotlinx-maven-serialization-plugin</artifactId>-->
-            <!--            </plugin>-->
             <plugin>
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <groupId>org.jetbrains.kotlin</groupId>
