@@ -1,28 +1,28 @@
-package ru.gpn.tp
+package ru.gpn.kr
+
+import java.lang.Exception
 
 fun main(args: Array<String>) {
     println("Hello, World")
 
-    val a = A(22, 33)
+//    val a = A(22, 33)
+    val q1 = DataComp(1, "e")
+    val q2 = DataComp(1, "e")
 
-    a.print()
-    a.b = 55
-    a.print()
+    val bb = (q1.a ?: throw Exception("fff")) == q2.a
 
-    ASingleton.print()
-
-    val c = C(1, 2, 3)
-    c.print()
-
-    val dataC1 = DataC(C(2, 7, 4))
-    val dataC2 = dataC1.copy()
-    dataC1.a.print()
-    dataC2.a.print()
+    println("bb=${bb}")
 }
 
 fun parseInt(s: String): Int? {
-    return s.toIntOrNull()
+    fun a(s2: String): String {
+        return s2 + "2"
+    }
+
+    return a(s).toIntOrNull()
 }
+
+data class DataComp(val a: Int?, val b: String?)
 
 open class DataA(val a: A = A(1))
 

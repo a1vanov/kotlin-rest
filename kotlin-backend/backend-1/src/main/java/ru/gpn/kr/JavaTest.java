@@ -1,4 +1,4 @@
-package ru.gpn.tp;
+package ru.gpn.kr;
 
 /**
  * @author User on 23.04.2020.
