@@ -233,6 +233,11 @@
                 <artifactId>kotlinx-serialization-runtime</artifactId>
                 <version>0.20.0</version>
             </dependency>
+            <dependency>
+                <groupId>org.jetbrains.kotlinx</groupId>
+                <artifactId>kotlinx-serialization-runtime-js</artifactId>
+                <version>0.20.0</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.webjars.npm</groupId>

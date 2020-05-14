@@ -35,21 +35,22 @@
                 </configuration>
 
                 <executions>
-<!--                    <execution>-->
-<!--                        <id>compile-js</id>-->
-<!--                        <phase>compile</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>js</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <sourceDirs>-->
-<!--                                <sourceDir>${project.build.sourceDirectory}</sourceDir>-->
-<!--                            </sourceDirs>-->
-<!--                            &lt;!&ndash; source map is useful for debugging in tools that support source maps &ndash;&gt;-->
-<!--                            <sourceMap>true</sourceMap>-->
-<!--                            <outputFile>${project.build.outputDirectory}/${project.artifactId}.js</outputFile>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
+                    <execution>
+                        <id>compile-js</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>js</goal>
+                        </goals>
+                        <configuration>
+                            <moduleKind>umd</moduleKind>
+                            <sourceDirs>
+                                <sourceDir>${project.build.sourceDirectory}</sourceDir>
+                            </sourceDirs>
+                            <!-- source map is useful for debugging in tools that support source maps -->
+                            <sourceMap>true</sourceMap>
+                            <outputFile>${project.build.outputDirectory}/${project.artifactId}.js</outputFile>
+                        </configuration>
+                    </execution>
                     <execution>
                         <id>compile-jvm</id>
                         <phase>compile</phase>
@@ -81,11 +82,6 @@
                         <groupId>org.jetbrains.kotlin</groupId>
                         <artifactId>kotlin-maven-serialization</artifactId>
                         <version>${kotlin.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.jetbrains.kotlinx</groupId>
-                        <artifactId>kotlinx-serialization-runtime</artifactId>
-                        <version>0.20.0</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -134,6 +130,10 @@
         <dependency>
             <groupId>org.jetbrains.kotlinx</groupId>
             <artifactId>kotlinx-serialization-runtime</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-serialization-runtime-js</artifactId>
         </dependency>
     </dependencies>
 </project>
