@@ -15,7 +15,7 @@ import styled.styledH1
 interface WelcomeUserProps : RProps
 
 class WelcomeUserState : RState {
-    val userName: String = ""
+    var userName: String = ""
 }
 
 class WelcomeUser : RComponent<WelcomeUserProps, WelcomeUserState>() {
@@ -23,9 +23,10 @@ class WelcomeUser : RComponent<WelcomeUserProps, WelcomeUserState>() {
         state = WelcomeUserState()
     }
 
-    override fun componentDidMount() {
-        super.componentDidMount()
-    }
+//    override fun componentDidMount() {
+//        super.componentDidMount()
+//        console.log("didMount")
+//    }
 
     override fun RBuilder.render() {
         styledH1 {

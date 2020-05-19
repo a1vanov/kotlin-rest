@@ -1,5 +1,6 @@
 package ru.gpn.kr.component
 
+import kotlinx.css.pct
 import kotlinx.css.px
 import kotlinx.css.width
 import kotlinx.html.InputType
@@ -12,6 +13,7 @@ import react.RBuilder
 import react.RComponent
 import react.RProps
 import react.RState
+import react.dom.div
 import react.dom.fieldSet
 import react.setState
 import styled.StyleSheet
@@ -44,22 +46,28 @@ class GetUserComponent : RComponent<GetUserProps, GetUserState>() {
                     onSubmitFunction = ::handleSubmit
                 }
                 fieldSet(classes = "pure-group") {
-                    styledInput(type = InputType.text, name = "userName") {
-                        attrs {
-                            placeholder = "имя пользователя"
-                            onChangeFunction = ::handleChange
+                    div {
+                        styledInput(type = InputType.text, name = "userName") {
+                            css {
+                                width = 100.pct
+                            }
+                            attrs {
+                                placeholder = "имя пользователя"
+                                onChangeFunction = ::handleChange
+                            }
                         }
                     }
-                    styledInput(type = InputType.submit) {
-//                        attrs {
-//                            onClickFunction = {
-//                                it.preventDefault()
+                    div {
+                        styledInput(type = InputType.submit) {
+                            attrs {
+                                value = "Отправить"
+//                                onClickFunction = {
+//                                    it.preventDefault()
 ////                                doLogin()
-//                            }
-//                        }
-                        +"Отправить"
+//                                }
+                            }
+                        }
                     }
-
                 }
             }
         }
