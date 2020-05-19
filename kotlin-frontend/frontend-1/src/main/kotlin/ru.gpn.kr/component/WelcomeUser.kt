@@ -37,7 +37,7 @@ class WelcomeUser : RComponent<WelcomeUserProps, WelcomeUserState>() {
         }
         styledDiv {
             css {
-                fontSize = 12.px
+                fontSize = 14.px
                 textAlign = TextAlign.center
             }
 
