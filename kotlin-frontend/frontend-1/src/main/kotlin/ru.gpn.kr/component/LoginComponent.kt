@@ -1,49 +1,63 @@
 package ru.gpn.kr.component
 
-import kotlinx.coroutines.async
+import kotlinx.html.InputType
+import kotlinx.html.js.onChangeFunction
+import kotlinx.html.js.onClickFunction
+import org.w3c.dom.HTMLInputElement
+import react.RBuilder
+import react.dom.div
+import react.dom.form
+import react.RComponent
+import react.RState
+import react.dom.button
+import react.dom.fieldSet
+import react.dom.input
+import react.dom.label
+import react.dom.legend
+import react.setState
 
-import kotlinx.html.*
-import kotlinx.html.js.*
-import org.jetbrains.demo.thinkter.LoginOrRegisterFailedException
-import org.jetbrains.demo.thinkter.model.*
-import react.*
-import react.dom.*
-import kotlin.browser.*
-import org.jetbrains.demo.thinkter.UserProps
-import org.jetbrains.demo.thinkter.login
 
-class LoginComponent : ReactDOMComponent<UserProps, LoginFormState>() {
-    companion object : ReactComponentSpec<LoginComponent, UserProps, LoginFormState>
+class LoginFormState(var login: String, var password: String, var disabled: Boolean, var errorMessage: String?) : RState
+
+class LoginComponent : RComponent<GetUserProps, LoginFormState>() {
 
     init {
         state = LoginFormState("", "", false, "")
     }
 
-    override fun ReactDOMBuilder.render() {
+    override fun RBuilder.render() {
         div {
             form(classes = "pure-form pure-form-stacked") {
                 legend { +"Login" }
 
                 fieldSet(classes = "pure-group") {
                     input(type = InputType.text, name = "login") {
-                        value = state.login
-                        placeholder = "Login"
-                        disabled = state.disabled
+                        attrs {
+                            value = state.login
+                            placeholder = "Login"
+                            disabled = state.disabled
 
-                        onChangeFunction = {
-                            setState {
-                                login = it.inputValue
+                            onChangeFunction = {
+                                val target = it.target as HTMLInputElement
+
+                                setState {
+                                    login = target.value
+                                }
                             }
                         }
                     }
                     input(type = InputType.password, name = "password") {
-                        value = state.password
-                        placeholder = "Password"
-                        disabled = state.disabled
+                        attrs {
+                            value = state.password
+                            placeholder = "Password"
+                            disabled = state.disabled
 
-                        onChangeFunction = {
-                            setState {
-                                password = it.inputValue
+                            onChangeFunction = {
+                                val target = it.target as HTMLInputElement
+
+                                setState {
+                                    password = target.value
+                                }
                             }
                         }
                     }
@@ -57,11 +71,13 @@ class LoginComponent : ReactDOMComponent<UserProps, LoginFormState>() {
 
                 button(classes = "pure-button pure-button-primary") {
                     +"Login"
-                    disabled = state.disabled
+                    attrs {
+                        disabled = state.disabled
 
-                    onClickFunction = {
-                        it.preventDefault()
-                        doLogin()
+                        onClickFunction = {
+                            it.preventDefault()
+                            doLogin()
+                        }
                     }
                 }
             }
@@ -72,30 +88,28 @@ class LoginComponent : ReactDOMComponent<UserProps, LoginFormState>() {
         setState {
             disabled = true
         }
-        async {
-            val user = login(state.login, state.password)
-            loggedIn(user)
-        }.catch { err -> loginFailed(err) }
+//        async {
+//            val user = login(state.login, state.password)
+//            loggedIn(user)
+//        }.catch { err -> loginFailed(err) }
     }
 
-    private fun loggedIn(user: User) {
-        props.userAssigned(user)
-    }
+//    private fun loggedIn(user: User) {
+//        props.userAssigned(user)
+//    }
 
     private fun loginFailed(err: Throwable) {
-        if (err is LoginOrRegisterFailedException) {
-            setState {
-                disabled = false
-                errorMessage = err.message
-            }
-        } else {
-            console.error("Login failed", err)
-            setState {
-                disabled = false
-                errorMessage = "Login failed: please reload page and try again"
-            }
-        }
+//        if (err is LoginOrRegisterFailedException) {
+//            setState {
+//                disabled = false
+//                errorMessage = err.message
+//            }
+//        } else {
+//            console.error("Login failed", err)
+//            setState {
+//                disabled = false
+//                errorMessage = "Login failed: please reload page and try again"
+//            }
+//        }
     }
 }
-
-class LoginFormState(var login: String, var password: String, var disabled: Boolean, var errorMessage: String?) : RState

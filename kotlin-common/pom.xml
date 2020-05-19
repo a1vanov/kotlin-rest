@@ -38,7 +38,7 @@
                             <goal>js</goal>
                         </goals>
                         <configuration>
-                            <moduleKind>umd</moduleKind>
+                            <moduleKind>commonjs</moduleKind>
                             <sourceDirs>
                                 <sourceDir>${project.build.sourceDirectory}</sourceDir>
                             </sourceDirs>

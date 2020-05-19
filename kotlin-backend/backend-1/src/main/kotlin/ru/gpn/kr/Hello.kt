@@ -4,7 +4,6 @@ import java.lang.Exception
 
 fun main(args: Array<String>) {
     println("Hello, World")
-
 //    val a = A(22, 33)
     val q1 = DataComp(1, "e")
     val q2 = DataComp(1, "e")
@@ -46,6 +45,29 @@ class C(a: Int, b: Int, val c: Int) : A(a, b) {
         println("a=$a, b=$b, c=$c")
     }
 }
+
+public inline fun sus(crossinline block: () -> Unit) {
+    var a = object : Any() {
+        fun a() = block()
+    }
+}
+
+public suspend inline fun <T> suspendCancellableCoroutine(crossinline block: (Int) -> Unit) {
+
+}
+
+fun r() {
+    sus() {
+        var a = 1
+        return@sus
+    }
+}
+
+//public suspend fun <T> Int.await(): T = sus { cont: Int ->
+//    this@await.then(
+//            onFulfilled = { cont.resume(it) },
+//            onRejected = { cont.resumeWithException(it) })
+//}
 
 object ASingleton : A(1)
 
