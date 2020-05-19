@@ -23,10 +23,10 @@ class WelcomeUser : RComponent<WelcomeUserProps, WelcomeUserState>() {
         state = WelcomeUserState()
     }
 
-//    override fun componentDidMount() {
+    override fun componentDidMount() {
 //        super.componentDidMount()
-//        console.log("didMount")
-//    }
+        console.log("componentDidMount")
+    }
 
     override fun RBuilder.render() {
         styledH1 {
