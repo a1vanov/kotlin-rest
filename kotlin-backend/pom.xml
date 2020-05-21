@@ -18,20 +18,6 @@
         <module>backend-1</module>
     </modules>
 
-<!--    <dependencies>-->
-<!--        <dependency>-->
-<!--            <groupId>org.jetbrains.kotlin</groupId>-->
-<!--            <artifactId>kotlin-stdlib-jdk8</artifactId>-->
-<!--            <version>${kotlin.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.jetbrains.kotlin</groupId>-->
-<!--            <artifactId>kotlin-test</artifactId>-->
-<!--            <version>${kotlin.version}</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
-<!--    </dependencies>-->
-
     <build>
         <pluginManagement>
             <plugins>
@@ -39,8 +25,10 @@
                     <!-- To compile mixed code applications Kotlin compiler should be invoked before Java compiler. -->
                     <groupId>org.jetbrains.kotlin</groupId>
                     <artifactId>kotlin-maven-plugin</artifactId>
+                    <version>${kotlin.version}</version>
                     <configuration>
-                        <jvmTarget>1.8</jvmTarget>
+                        <jvmTarget>11</jvmTarget>
+                        <!--                        <javaParameters>true</javaParameters>-->
                     </configuration>
                     <executions>
                         <execution>
@@ -77,6 +65,10 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.8.1</version>
+                    <configuration>
+                        <!-- for Spring-Boot to avoid parent org.springframework.boot:spring-boot-starter-parent -->
+<!--                        <parameters>true</parameters>-->
+                    </configuration>
                     <executions>
                         <!-- Replacing default-compile as it is treated specially by maven -->
                         <execution>
